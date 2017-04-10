@@ -50,7 +50,7 @@ Please visit our [Support page](https://www.picotech.com/tech-support) to contac
 
 ## Copyright and licensing
 
-picosdk-python-examples is Copyright (C) 2017 Pico Technology Ltd. All rights reserved. See LICENSE.md for license terms. 
+picosdk-python-examples is Copyright (C) 2014 - 2017 Pico Technology Ltd. All rights reserved. See [LICENSE.md](LICENSE.md) for license terms. 
 
 *PicoScope* and *PicoLog* are registered trademarks of Pico Technology Ltd. 
 
@@ -63,4 +63,14 @@ picosdk-python-examples is Copyright (C) 2017 Pico Technology Ltd. All rights re
 ## Contributing
 
 Contributions are welcome. Please refer to our [guidelines for contributing](.github/CONTRIBUTING.md) for further information.
+
+## Applications written by our customers
+
+The following are Python examples written by our Customers:
+
+* [pico-python](https://github.com/colinoflynn/pico-python)
+* [PicoPy](https://github.com/hgomersall/PicoPy)
+* [picotools](https://github.com/znuh/picotools)
+* [TC08-Command-Line](https://github.com/timfish/TC08-Command-Line)
+* [usbtc08](https://github.com/bankrasrg/usbtc08)
 
