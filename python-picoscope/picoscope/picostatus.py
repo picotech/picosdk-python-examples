@@ -5,10 +5,12 @@
  *			Defines the PICO_STATUS values defined in the PicoStatus.h
  *			C header file.
  * 	   
+ *	  @author: mario
+ * 
  *    Copyright (C) 2014 - 2017 Pico Technology Ltd. See LICENSE file for terms.
  *
 """
-"""
+
 PICO_STATUS = dict()
 PICO_STATUS["PICO_OK"] = 0x00000000
 PICO_STATUS["PICO_MAX_UNITS_OPENED"] = 0x00000001

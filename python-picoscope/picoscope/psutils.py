@@ -5,6 +5,7 @@
  *			Basic and helper functions/classes used in PicoScope modules
  * 	   
  *	   Created on 28 Aug 2014
+ *
  *     @author: mario
  *
  *     Copyright (C) 2014 - 2017 Pico Technology Ltd. See LICENSE file for terms.

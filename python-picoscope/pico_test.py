@@ -3,7 +3,9 @@
  *     
  *	   Description:
  *			Example test script.
- * 	   
+ * 	  
+ *	  @author: mario
+ *  
  *    Copyright (C) 2014 - 2017 Pico Technology Ltd. See LICENSE file for terms.
  *
 """

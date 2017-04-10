@@ -7,6 +7,8 @@
  *			a PicoScope oscilloscope using the driver API functions 
  * 			from the drivers listed below.
  * 	   
+ *	  @author: mario
+ * 
  *    Copyright (C) 2014 - 2017 Pico Technology Ltd. See LICENSE file for terms.
  *
 """

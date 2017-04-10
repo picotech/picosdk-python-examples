@@ -8,16 +8,12 @@
  *			demonstrating how to capture data from 
  *			PicoScope oscilloscopes.
  * 	   
+ *    Created on 18 Nov 2014
+ *
+ *	  @author: mario
+ *
  *    Copyright (C) 2014 - 2017 Pico Technology Ltd. See LICENSE file for terms.
  *
-"""
-
-"""
-Created on 18 Nov 2014
-
-Pico Python Scope
-
-@author: mario
 """
 
 from pyqtgraph.Qt import QtGui, QtCore
