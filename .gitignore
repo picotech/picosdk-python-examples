@@ -1,0 +1,14 @@
+# .gitignore file for picosdk-python-examples repository
+# Untracked files/folders to ignore.
+
+# Microsoft Windows platforms
+
+**/*.dll
+
+# Linux platforms
+
+**/*.so
+
+# macOS platforms
+
+**/*.dylib
