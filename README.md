@@ -22,7 +22,7 @@ picosdk-python-examples contains an example Python module for PicoScope oscillos
 
 **Notes:** The code is not much different from Python3 and can be easily converted with the [2to3](https://docs.python.org/2/library/2to3.html) utility.
 The module has been tested and proved working on Linux (including ARM derivatives), Windows and MacOSX.
-For best experience on Windows Python(x,y) suite is recommended.
+For best experience on Windows [Python(x,y)] suite(https://python-xy.github.io/) is recommended.
 
 ### Installing drivers
 
