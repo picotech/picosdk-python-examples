@@ -66,7 +66,7 @@ Contributions are welcome. Please refer to our [guidelines for contributing](.gi
 
 ## Applications written by our customers
 
-The following are Python examples written by our Customers:
+The following are Python examples written by our customers:
 
 * [pico-python](https://github.com/colinoflynn/pico-python)
 * [PicoPy](https://github.com/hgomersall/PicoPy)
