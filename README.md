@@ -21,14 +21,14 @@ picosdk-python-examples contains an example Python module for PicoScope oscillos
 * PicoPyScope example has been written for use with [PyQtGraph](http://www.pyqtgraph.org/).
 
 **Notes:** The code is not much different from Python3 and can be easily converted with the [2to3](https://docs.python.org/2/library/2to3.html) utility.
-The module has been tested and proved working on Linux (including ARM derivatives), Windows and MacOSX.
+The module has been tested and proved working on Linux (including ARM derivatives), Microsoft Windows and Mac OS X.
 For best experience on Windows [Python(x,y)](https://python-xy.github.io/) suite is recommended.
 
 ### Installing drivers
 
 Drivers are available for the following platforms. Refer to the subsections below for further information.
 
-#### Windows
+#### Microsoft Windows
 
 * Download the PicoSDK (32-bit or 64-bit) driver package installer from our [Downloads page](https://www.picotech.com/downloads).
 
