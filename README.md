@@ -1,6 +1,6 @@
 # picosdk-python-examples
 
-picosdk-python-examples contains an example Python module for PicoScope oscilloscopes.
+*picosdk-python-examples* contains an example Python module for PicoScope oscilloscopes.
 
 ## Getting started
 
