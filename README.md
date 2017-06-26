@@ -16,13 +16,19 @@
   * ps5000a
   * ps6000
 * [Python 2.7](https://www.python.org/download/releases/2.7/) 
+
+#### Microsoft Windows
+
+* For best experience on Microsoft Windows [Python(x,y)](https://python-xy.github.io/) suite is recommended.
+
+#### Linux and Mac OS X
+
 * For Streaming mode data collection, the [pytables](http://www.pytables.org/) module is required.
 * The test_block and test_streaming examples require [matplotlib](http://matplotlib.org/) and [signal](https://docs.python.org/2/library/signal.html).
 * PicoPyScope example has been written for use with [PyQtGraph](http://www.pyqtgraph.org/).
 
 **Notes:** The code is not much different from Python3 and can be easily converted with the [2to3](https://docs.python.org/2/library/2to3.html) utility.
 The module has been tested and proved working on Linux (including ARM derivatives), Microsoft Windows and Mac OS X.
-For best experience on Windows [Python(x,y)](https://python-xy.github.io/) suite is recommended.
 
 ### Installing drivers
 
