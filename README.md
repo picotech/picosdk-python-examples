@@ -68,8 +68,11 @@ if __name__ == "__main__":
 		state.range = ps.m.Ranges.r5v
 		status = ps.set_channel(channel=ps.m.Channels.A, state=state)
 		if status == ps.m.pico_num("PICO_OK"):
-			s, index = ps.locate_buffer(channel=ps.m.Channels.A, samples=1000,
-										segment=0, mode=ps.m.RatioModes.raw, downsample=0)
+			s, index = ps.locate_buffer(channel=ps.m.Channels.A,
+                                samples=1000,
+                                segment=0,
+                                mode=ps.m.RatioModes.raw,
+                                downsample=0)
 			status = ps.collect_segment(segment=0, interval=1000)
 			if status == ps.m.pico_num("PICO_OK"):
 				status, data = ps.get_buffer_volts(index=index)
