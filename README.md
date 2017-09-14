@@ -54,8 +54,9 @@ Drivers are available for the following platforms. Refer to the subsections belo
 * test_stream.py - streaming testing utility, including some performance tests (-h to see all options)
 * picopyscope.py - simple PC oscilloscope UI
 
-*Note:* A basic script requires just a few lines as below. Most functions have been decorated with docstrings.
+**Note:** A basic script requires just a few lines as below. Most functions have been decorated with docstrings.
 
+'''
 	from picoscope import ps2000
 
 	if __name__ == "__main__":
@@ -75,6 +76,7 @@ Drivers are available for the following platforms. Refer to the subsections belo
 					print data
 					exit(0)
 		print ps.m.pico_tag(status)
+'''
 
 ### Programmer's Guides
 
