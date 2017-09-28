@@ -102,6 +102,7 @@ The following are Python examples written by our customers:
 * [picotools](https://github.com/znuh/picotools)
 * [TC08-Command-Line](https://github.com/timfish/TC08-Command-Line)
 * [usbtc08](https://github.com/bankrasrg/usbtc08)
+* [picostream](https://github.com/jbentham/picostream)
 
 ## Copyright and licensing
 
