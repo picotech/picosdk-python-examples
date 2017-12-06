@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
- *     Filename: test_stream.py
+ *     Filename: stream_capture.py
  *     
  *	   Description:
  *			Example script showing streaming mode data capture from 
@@ -16,7 +16,7 @@ from optparse import OptionParser, OptionGroup
 import importlib
 from exceptions import ImportError, OSError
 import matplotlib.pyplot as plt
-from pico_test import *
+from example_utils import *
 import os
 from time import strftime
 
@@ -254,7 +254,7 @@ def main():
     if options.variant != "":
         for d in drivers:
             try:
-                module = importlib.import_module("picoscope.%s" % d)
+                module = importlib.import_module("picosdk.%s" % d)
                 if options.variant not in module.variants:
                     module = None
                     continue
@@ -277,7 +277,7 @@ def main():
         else:
             for d in drivers:
                 try:
-                    module = importlib.import_module("picoscope.%s" % d)
+                    module = importlib.import_module("picosdk.%s" % d)
                     units = module.enumerate_units()
                     if len(units) > 0 and options.serial in units:
                         break
@@ -289,7 +289,7 @@ def main():
         units = ()
         for d in drivers:
             try:
-                module = importlib.import_module("picoscope.%s" % d)
+                module = importlib.import_module("picosdk.%s" % d)
                 units = module.enumerate_units()
                 if len(units) > 0:
                     break
@@ -675,12 +675,12 @@ def main():
                         diff = data - ideal[c][m]
                         std_error = np.std(diff) / ps.info.max_adc * 200
                         max_error = np.max(np.abs(diff)) / ps.info.max_adc * 200
-                        if p_test(title="%s std" % name, value=std_error, limit=options.std_limit):
+                        if p_assert(title="%s std" % name, value=std_error, limit=options.std_limit):
                             PASSED += 1
                         else:
                             FAILED += 1
 
-                        if p_test(title="%s max" % name, value=max_error, limit=options.max_limit):
+                        if p_assert(title="%s max" % name, value=max_error, limit=options.max_limit):
                             PASSED += 1
                         else:
                             FAILED += 1
@@ -762,7 +762,7 @@ def main():
                                     % (name, ps.m.ThresholdDirections.labels[options.triggd],
                                        options.triggh, options.triggv, x, int(y),
                                        "found" if found else "not found")
-                            if p_test(title=title, result=found):
+                            if p_assert(title=title, result=found):
                                 PASSED += 1
                             else:
                                 FAILED += 1

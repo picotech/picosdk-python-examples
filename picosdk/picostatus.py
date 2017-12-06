@@ -1,14 +1,8 @@
+#
+# Copyright (C) 2014-2017 Pico Technology Ltd. See LICENSE file for terms.
+#
 """
- *     Filename: picostatus.py
- *     
- *	   Description:
- *			Defines the PICO_STATUS values defined in the PicoStatus.h
- *			C header file.
- * 	   
- *	  @author: mario
- * 
- *    Copyright (C) 2014 - 2017 Pico Technology Ltd. See LICENSE file for terms.
- *
+Defines the PICO_STATUS values defined in the PicoStatus.h C header file.
 """
 
 PICO_STATUS = dict()

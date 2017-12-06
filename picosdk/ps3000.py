@@ -1,21 +1,13 @@
+#
+# Copyright (C) 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
+#
 """
- *     Filename: ps3000.py
- *     
- *	   Description:
- *			Python bindings for [lib]ps3000.[dll|so|dylib]
- *			This is a Python module defining the functions from the ps3000.h C header file
- *			for PicoScope 3000 Series Oscilloscopes . 
- * 	   
- *    Created on 11 Sep 2015
- * 
- *	  @author: mario
- * 
- *    Copyright (C) 2015 - 2017 Pico Technology Ltd. See LICENSE file for terms.
- *
+This is a Python module defining the functions from the ps3000.h C header file
+for PicoScope 3000 Series oscilloscopes using the ps3000 driver API functions.
 """
 
 from ps3000base import *
-from picoscope import ps3000base
+from picosdk import ps3000base
 
 name = "ps3000"
 _libps3000 = psloadlib(name)

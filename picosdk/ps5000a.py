@@ -1,22 +1,15 @@
+#
+# Copyright (C) 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
+#
 """
- *     Filename: ps5000a.py
- *     
- *	   Description:
- *			Python bindings for [lib]ps5000a.[dll|so|dylib]
- *			This is a Python module defining the functions from the ps5000aApi.h C header file
- *			for PicoScope 5000 Series Oscilloscopes. 
- * 	   
- *    Created on 11 Mar 2015
- * 
- *	  @author: mario
- * 
- *    Copyright (C) 2015 - 2017 Pico Technology Ltd. See LICENSE file for terms.
- *
+This is a Python module defining the functions from the ps5000aApi.h C header
+file for PicoScope 5000 Series oscilloscopes using the ps5000a driver API
+functions.
 """
 
 from ps5000base import *
 from psutils import *
-from picoscope import ps5000base
+from picosdk import ps5000base
 
 name = "ps5000a"
 _libps5000a = psloadlib(name)

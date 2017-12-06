@@ -1,22 +1,15 @@
+#
+# Copyright (C) 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
+#
 """
- *     Filename: ps4000a.py
- *     
- *	   Description:
- *			Python bindings for [lib]ps4000a.[dll|so|dylib]
- *			This is a Python module defining the functions from the ps4000aApi.h C header file
- *			for PicoScope 4000 Series Oscilloscopes. 
- * 	   
- *    Created on 20 Aug 2015
- * 
- *	  @author: mario
- * 
- *    Copyright (C) 2015 - 2017 Pico Technology Ltd. See LICENSE file for terms.
- *
+This is a Python module defining the functions from the ps4000aApi.h C header
+file for PicoScope 4000 Series oscilloscopes using the ps4000a driver API
+functions.
 """
 
 from ps5000base import *
 from psutils import *
-from picoscope import ps5000base
+from picosdk import ps5000base
 
 name = "ps4000a"
 _libps4000a = psloadlib(name)

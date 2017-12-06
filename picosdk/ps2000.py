@@ -1,21 +1,13 @@
+#
+# Copyright (C) 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
+#
 """
- *     Filename: ps2000.py
- *     
- *	   Description:
- *			Python bindings for [lib]ps2000.[dll|so|dylib]
- *			This is a Python module defining the functions from the ps2000.h C header file
- *			for PicoScope 2000 Series Oscilloscopes. 
- * 	   
- *    Created on 07 Sep 2015
- * 
- *	  @author: mario
- * 
- *    Copyright (C) 2015 - 2017 Pico Technology Ltd. See LICENSE file for terms.
- *
+This is a Python module defining the functions from the ps2000.h C header file
+for PicoScope 2000 Series oscilloscopes using the ps2000 driver API functions.
 """
 
 from ps3000base import *
-from picoscope import ps3000base
+from picosdk import ps3000base
 
 name = "ps2000"
 _libps2000 = psloadlib(name)

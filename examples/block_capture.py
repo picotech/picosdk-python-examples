@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
- *     Filename: test_block.py
+ *     Filename: block_capture.py
  *     
  *	   Description:
  *			Example script showing a block mode data capture from 
@@ -17,7 +17,7 @@ from optparse import OptionParser, OptionGroup
 import importlib
 from exceptions import ImportError, OSError
 import matplotlib.pyplot as plt
-from pico_test import *
+from example_utils import *
 import os
 from time import strftime
 
@@ -274,11 +274,11 @@ def validate_sine(ps, index, std_limit=3.0, max_limit=10.0):
     diff = data - ideal
     std_error = np.std(diff) / ps.info.max_adc * 200
     max_error = np.max(np.abs(diff)) / ps.info.max_adc * 200
-    if p_test(title="%s std" % name, value=std_error, limit=std_limit):
+    if p_assert(title="%s std" % name, value=std_error, limit=std_limit):
         PASSED += 1
     else:
         FAILED += 1
-    if p_test(title="%s max" % name, value=max_error, limit=max_limit):
+    if p_assert(title="%s max" % name, value=max_error, limit=max_limit):
         PASSED += 1
     else:
         FAILED += 1
@@ -336,7 +336,7 @@ def main():
     if options.variant != "":
         for d in drivers:
             try:
-                module = importlib.import_module("picoscope.%s" % d)
+                module = importlib.import_module("picosdk.%s" % d)
                 if options.variant not in module.variants:
                     module = None
                     continue
@@ -359,7 +359,7 @@ def main():
         else:
             for d in drivers:
                 try:
-                    module = importlib.import_module("picoscope.%s" % d)
+                    module = importlib.import_module("picosdk.%s" % d)
                     units = module.enumerate_units()
                     if len(units) > 0 and options.serial in units:
                         break
@@ -371,7 +371,7 @@ def main():
         units = ()
         for d in drivers:
             try:
-                module = importlib.import_module("picoscope.%s" % d)
+                module = importlib.import_module("picosdk.%s" % d)
                 units = module.enumerate_units()
                 if len(units) > 0:
                     break
@@ -801,7 +801,7 @@ def main():
                                            ps.m.ThresholdDirections.labels[options.triggd],
                                            options.triggh, options.triggv, x, int(y),
                                            "found" if found else "not found")
-                                if p_test(title=title, result=found):
+                                if p_assert(title=title, result=found):
                                     PASSED += 1
                                 else:
                                     FAILED += 1

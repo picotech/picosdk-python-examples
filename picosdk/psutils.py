@@ -1,15 +1,8 @@
+#
+# Copyright (C) 2014-2017 Pico Technology Ltd. See LICENSE file for terms.
+#
 """
- *     Filename: psutils.py
- *     
- *	   Description:
- *			Basic and helper functions/classes used in PicoScope modules
- * 	   
- *	   Created on 28 Aug 2014
- *
- *     @author: mario
- *
- *     Copyright (C) 2014 - 2017 Pico Technology Ltd. See LICENSE file for terms.
- *
+Basic and helper functions/classes used in PicoScope modules
 """
 
 import ctypes
@@ -26,7 +19,7 @@ import warnings
 import multiprocessing
 from exceptions import AttributeError, OSError, TypeError
 from copy import deepcopy
-from picoscope.picostatus import pico_num
+from picosdk.picostatus import pico_num
 
 """ disable warnings from PyTables """
 for cat in ("UndoRedoWarning", "NaturalNameWarning", "PerformanceWarning", "FlavorWarning", "FiltersWarning",

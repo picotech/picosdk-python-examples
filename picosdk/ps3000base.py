@@ -1,20 +1,13 @@
+#
+# Copyright (C) 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
+#
 """
- *     Filename: ps3000base.py
- *     
- *	   Description:
- *			Python calls for ps3000 based PicoScope devices.
- * 	   
- *    Created on 7 Sep 2015
- * 
- *	  @author: mario
- * 
- *    Copyright (C) 2015 - 2017 Pico Technology Ltd. See LICENSE file for terms.
- *
+Python calls for ps3000 based PicoScope devices.
 """
 
-from picoscope.ps5000base import *
+from picosdk.ps5000base import *
 from psutils import *
-from picoscope import ps5000base
+from picosdk import ps5000base
 
 
 class Info(dict2class):

@@ -10,7 +10,7 @@
  *
 """
 
-import picoscope.picostatus as st
+import picosdk.picostatus as st
 import numpy as np
 from math import pi, sin
 from exceptions import IndexError, ZeroDivisionError
@@ -66,7 +66,7 @@ def p_error(msg, end=True):
         exit(1)
 
 
-def p_test(title, value=1.0, limit=0.0, result=None):
+def p_assert(title, value=1.0, limit=0.0, result=None):
     if result is not None:
         passed = result
         log = "%s: %s" % ("PASS" if result else "FAIL", title)

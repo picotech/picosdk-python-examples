@@ -50,35 +50,35 @@ Drivers are available for the following platforms. Refer to the subsections belo
 
 #### python-picoscope
 
-* test_block.py - comprehensive suite for testing block collection (-h to see all options)
-* test_stream.py - streaming testing utility, including some performance tests (-h to see all options)
+* block_capture.py - comprehensive suite for testing block collection (-h to see all options)
+* stream_capture.py - streaming testing utility, including some performance tests (-h to see all options)
 * picopyscope.py - simple PC oscilloscope UI
 
 **Note:** A basic script requires just a few lines as below. Most functions have been decorated with docstrings.
 
 ```python
-from picoscope import ps2000
+from picosdk import ps2000
 
 if __name__ == "__main__":
-	ps = ps2000.Device()
-	status = ps.open_unit()
-	if status == ps.m.pico_num("PICO_OK"):
-		s, state = ps.get_channel_state(channel=ps.m.Channels.A)
-		state.enabled = True
-		state.range = ps.m.Ranges.r5v
-		status = ps.set_channel(channel=ps.m.Channels.A, state=state)
-		if status == ps.m.pico_num("PICO_OK"):
-			s, index = ps.locate_buffer(channel=ps.m.Channels.A,
-                                samples=1000,
-                                segment=0,
-                                mode=ps.m.RatioModes.raw,
-                                downsample=0)
-			status = ps.collect_segment(segment=0, interval=1000)
-			if status == ps.m.pico_num("PICO_OK"):
-				status, data = ps.get_buffer_volts(index=index)
-				print data
-				exit(0)
-	print ps.m.pico_tag(status)
+    ps = ps2000.Device()
+    status = ps.open_unit()
+    if status == ps.m.pico_num("PICO_OK"):
+        s, state = ps.get_channel_state(channel=ps.m.Channels.A)
+        state.enabled = True
+        state.range = ps.m.Ranges.r5v
+        status = ps.set_channel(channel=ps.m.Channels.A, state=state)
+        if status == ps.m.pico_num("PICO_OK"):
+            s, index = ps.locate_buffer(channel=ps.m.Channels.A,
+                                        samples=1000,
+                                        segment=0,
+                                        mode=ps.m.RatioModes.raw,
+                                        downsample=0)
+            status = ps.collect_segment(segment=0, interval=1000)
+            if status == ps.m.pico_num("PICO_OK"):
+                status, data = ps.get_buffer_volts(index=index)
+                print data
+                exit(0)
+    print ps.m.pico_tag(status)
 ```
 
 ### Programmer's Guides

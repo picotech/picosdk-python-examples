@@ -1,16 +1,9 @@
 # -*- coding: utf-8 -*-
+#
+# Copyright (C) 2014-2017 Pico Technology Ltd. See LICENSE file for terms.
+#
 """
- *     Filename: ps5000base.py
- *     
- *	   Description:
- *			Python calls for ps5000 based PicoScope devices.
- * 	   
- *	   Created on 28 Aug 2014
- *
- * 	   @author: mario
- *
- *     Copyright (C) 2014 - 2017 Pico Technology Ltd. See LICENSE file for terms.
- *
+Python calls for ps5000 based PicoScope devices.
 """
 
 from threading import *

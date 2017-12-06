@@ -25,7 +25,7 @@ import importlib
 import sys
 import threading as th
 import numpy as np
-from picoscope import picostatus as ps, psutils
+from picosdk import picostatus as ps, psutils
 
 
 class PicoPyDriver(object):
@@ -35,7 +35,7 @@ class PicoPyDriver(object):
         self.module = None
         self.serials = []
         try:
-            self.module = importlib.import_module("picoscope.%s" % name)
+            self.module = importlib.import_module("picosdk.%s" % name)
             self.available = True
         except Exception as ex:
             print "module:", ex.message
