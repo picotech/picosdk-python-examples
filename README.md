@@ -24,7 +24,7 @@
 #### Linux and Mac OS X
 
 * For Streaming mode data collection, the [pytables](http://www.pytables.org/) module is required.
-* The test_block and test_streaming examples require [matplotlib](http://matplotlib.org/) and [signal](https://docs.python.org/2/library/signal.html).
+* The `block_capture` and `streaming_capture` examples require [matplotlib](http://matplotlib.org/) and [signal](https://docs.python.org/2/library/signal.html).
 * PicoPyScope example has been written for use with [PyQtGraph](http://www.pyqtgraph.org/).
 
 **Notes:** The code is not much different from Python3 and can be easily converted with the [2to3](https://docs.python.org/2/library/2to3.html) utility.
@@ -45,6 +45,21 @@ Drivers are available for the following platforms. Refer to the subsections belo
 #### Mac OS X
 
 * Visit our [Downloads page](https://www.picotech.com/downloads) and download the PicoScope Beta for Mac OS X application.
+
+### Installing the python driver bindings
+
+A `distutils` installer is provided. After you have installed the PicoSDK
+driver package (see above), the Python installer can be used as follows:
+
+    python setup.py install
+
+on macOS and Linux you will either need to use `sudo` with this command, to
+install into the system folders, or to install for the current user only you
+can use:
+
+    python setup.py install --user
+
+Within python, the library for `import` is called `picosdk`.
 
 ### Scripts
 
