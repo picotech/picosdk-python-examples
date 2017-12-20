@@ -18,6 +18,6 @@ We will then review the pull request.
 
 ## Pull request guidelines
 
-* Include a note at the top of the file indicating the author name, date, and description of new file (or of change to existing file)
+* Follow the conventions in the other file headers if adding a new file, or changing an existing file
 * If contributing a new file, ensure that it is in the appropriate location in the repository directory structure
 * [Commit messages](https://chris.beams.io/posts/git-commit/#seven-rules) should clearly communicate the reason for the change
