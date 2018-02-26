@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015-2017 Pico Technology Ltd. See LICENSE file for terms.
+# Copyright (C) 2015-2018 Pico Technology Ltd. See LICENSE file for terms.
 #
 """
 This is a Python module defining the functions from the ps4000aApi.h C header
@@ -25,6 +25,14 @@ ldlib.name = name
         int8_t  *serial
     ); """
 make_symbol(ldlib, "OpenUnit", "ps4000aOpenUnit", c_uint32, [c_void_p, c_char_p])
+
+""" PICO_STATUS ps4000aOpenUnitWithResolution
+    (
+        int16_t *handle,
+        int8_t  *serial
+		PS4000A_DEVICE_RESOLUTION resolution
+    ); """
+make_symbol(ldlib, "OpenUnitWithResolution", "ps4000aOpenUnitWithResolution", c_uint32, [c_void_p, c_char_p, c_int32])
 
 """ PICO_STATUS ps4000aOpenUnitAsync
     (
@@ -698,6 +706,19 @@ make_symbol(ldlib, "GetCommonModeOverflow", "ps4000aGetCommonModeOverflow", c_ui
 make_symbol(ldlib, "SetFrequencyCounter", "ps4000aSetFrequencyCounter", c_uint32,
             [c_int16, c_int32, c_int16, c_int32, c_int16, c_int16])
 
+""" PICO_STATUS ps4000aSetDeviceResolution
+    (
+      int16_t                    handle,
+      PS4000A_DEVICE_RESOLUTION  resolution
+    ); """
+make_symbol(ldlib, "SetDeviceResolution", "ps4000aSetDeviceResolution", c_uint32, [c_int16, c_int32])
+
+""" PICO_STATUS ps4000aGetDeviceResolution
+    (
+        int16_t                    handle,
+        PS4000A_DEVICE_RESOLUTION *resolution
+    ); """
+make_symbol(ldlib, "GetDeviceResolution", "ps4000aGetDeviceResolution", c_uint32, [c_int16, c_void_p])
 
 class Channels(ps5000base.Channels):
     """ Class defining channels for the current device class """
@@ -712,6 +733,14 @@ class Channels(ps5000base.Channels):
     map = (A, B, C, D, E, F, G, H)
     labels = {A: "A", B: "B", C: "C", D: "D", E: "E", F: "F", G: "G", H: "H"}
 
+class Resolutions(dict2class):
+    """ Class defining resolutions for the current device class """
+    res8bit = 0
+    res12bit = 1
+    res14bit = 2
+    res15bit = 3
+    res16bit = 4
+    labels = {res8bit: "8 bit", res12bit: "12 bit", res14bit: "14 bit", res15bit: "15 bit", res16bit: "16 bit"}
 
 class TriggerChannels(ps5000base.TriggerChannels):
     """ Collection of channels used in triggering """
@@ -839,7 +868,7 @@ class PwqConditions(ps5000base.PwqConditions):
             TriggerChannels.Aux: self.aux,
         }
 
-variants = ("4824", "4424", "4425", "4225")
+variants = ("4824", "4425", "4225", "4444")
 
 
 class Device(PS5000Device):
@@ -870,6 +899,31 @@ class Device(PS5000Device):
             status = self.load_info()
         return status
 
+    def open_unit_with_resolution(self, serial=None, resolution=Resolutions.res12bit):
+        """ Opens unit
+        :param serial: string specifying device serial and batch
+        :type serial: string
+        :param resolution: optional resolution enum
+        :type resolution: int
+        :returns: status of the call
+        :rtype: int
+        """
+        """ Only one unit allowed per instance """
+        if self._handle > 0:
+            """ same will occur if 64 devices are opened... unlikely"""
+            return pico_num("PICO_MAX_UNITS_OPENED")
+        try:
+            status = ldlib.OpenUnitWithResolution(byref(self._chandle), c_char_p(serial), c_int32(resolution))
+        except AttributeError:
+            return pico_num("PICO_NOT_FOUND")
+
+        self._handle = self._chandle.value
+        self.info.handle = self._handle
+        """ Read INFO from device, populate self.info """
+        if status == pico_num("PICO_OK"):
+            status = self.load_info()
+        return status
+
     def load_info(self):
         """
         Allows to continue loading after initial failure
@@ -878,6 +932,9 @@ class Device(PS5000Device):
         if status == pico_num("PICO_OK"):
             """ Set device defaults """
             status = self.set_defaults()
+        if status == pico_num("PICO_OK"):
+            """ Initialise device resolution cache """
+            status = self._get_device_resolution()
         return status
 
     def _set_variant_info(self):
@@ -902,17 +959,6 @@ class Device(PS5000Device):
             self.info.has_awg = True
             self.info.awg_size = 16384
             self.info.has_ets = True
-        elif self.info.variant_info == "4424":
-            self.info.num_channels = 4
-            self.info.min_range = Ranges.r10mv
-            self.info.max_range = Ranges.r50v
-            self.info.has_siggen = True
-            self.info.siggen_frequency = 1000000
-            self.info.siggen_min = 0
-            self.info.siggen_max = 4000000
-            self.info.has_awg = True
-            self.info.awg_size = 16384
-            self.info.has_ets = True
         elif self.info.variant_info == "4425":
             self.info.num_channels = 4
             self.info.min_range = Ranges.r50mv
@@ -924,6 +970,13 @@ class Device(PS5000Device):
             self.info.num_channels = 2
             self.info.min_range = Ranges.r50mv
             self.info.max_range = Ranges.r200v
+            self.info.has_siggen = False
+            self.info.has_awg = False
+            self.info.has_ets = False
+        elif self.info.variant_info == "4444":
+            self.info.num_channels = 4
+            self.info.min_range = Ranges.r10mv
+            self.info.max_range = Ranges.r50v
             self.info.has_siggen = False
             self.info.has_awg = False
             self.info.has_ets = False
@@ -960,6 +1013,29 @@ class Device(PS5000Device):
         if power == pico_num("PICO_OK"):
             return power
         return ldlib.ChangePowerSource(self._chandle, c_uint32(power))
+		
+    def set_device_resolution(self, resolution):
+        """ Set device ADC resolution
+        :param resolution: enum as in Resolutions
+        :type resolution: int
+        :return: status of the call
+        :rtype: int
+        """
+        if self._handle <= 0:
+            return pico_num("PICO_INVALID_HANDLE")
+        status = ldlib.SetDeviceResolution(self._chandle, c_int32(resolution))
+        if status == pico_num("PICO_OK"):
+            self.info.resolution = resolution
+        return status
+    
+    def _get_device_resolution(self):
+        if self._handle <= 0:
+            return pico_num("PICO_INVALID_HANDLE")
+        res = c_int32(-1)
+        status = ldlib.GetDeviceResolution(self._chandle, byref(res))
+        if status == pico_num("PICO_OK"):
+            self.info.resolution = res.value
+        return status
 
     def set_advanced_trigger(self, conditions=None, analog=None, digital=None, waitfor=0):
         """ Passes advanced triggering setup to the driver
