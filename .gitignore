@@ -21,3 +21,6 @@
 
 # SDK download warning file
 .sdkwarning
+
+# build folder
+build/
