@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014-2017 Pico Technology Ltd. See LICENSE file for terms.
+# Copyright (C) 2014-2018 Pico Technology Ltd. See LICENSE file for terms.
 #
 """
 Defines the PICO_STATUS values defined in the PicoStatus.h C header file.
