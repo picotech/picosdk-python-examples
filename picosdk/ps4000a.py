@@ -958,7 +958,7 @@ class Device(PS5000Device):
             self.info.siggen_max = 4000000
             self.info.has_awg = True
             self.info.awg_size = 16384
-            self.info.has_ets = True
+            self.info.has_ets = False
         elif self.info.variant_info == "4425":
             self.info.num_channels = 4
             self.info.min_range = Ranges.r50mv
