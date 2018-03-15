@@ -932,7 +932,7 @@ class Device(PS5000Device):
         if status == pico_num("PICO_OK"):
             """ Set device defaults """
             status = self.set_defaults()
-        if status == pico_num("PICO_OK"):
+        if status == pico_num("PICO_OK") and self.info.variant_info == "4444":
             """ Initialise device resolution cache """
             status = self._get_device_resolution()
         return status
