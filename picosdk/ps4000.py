@@ -763,16 +763,6 @@ class Device(ps5000base.PS5000Device):
             self.info.max_segments = 32768
             self.info.min_range = self.m.Ranges.r50mv
             self.info.max_range = self.m.Ranges.r100v
-        elif self.info.variant_info == "4226":
-            self.info.num_channels = 2
-            self.info.has_siggen = True
-            self.info.siggen_frequency = 100000
-            self.info.siggen_min = 500000
-            self.info.siggen_max = 2000000
-            self.info.has_awg = True
-            self.info.max_segments = 32768
-            self.info.min_range = self.m.Ranges.r50mv
-            self.info.max_range = self.m.Ranges.r100v
         elif self.info.variant_info == "4227":
             self.info.num_channels = 2
             self.info.has_siggen = True
