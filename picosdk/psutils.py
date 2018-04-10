@@ -130,21 +130,26 @@ class StreamingTape(object):
         if not filename:
             raise ValueError('Error in class StreamingTape: Filename not specified.')
         else:
+            # Check filename has an extension
+            extension = os.path.splitext(filename)[-1].lower()
 
-            self._filename = filename
-            self._title = title
-            self._limit = limit
-            self._overwrite = overwrite
-            self._stats = stats
-            self.lastError = None
-            self._recordLock = th.Lock()
-            self._readLock = th.Lock()
-            for l in (self._recordLock, self._readLock):
-                if l.acquire(False):
-                    l.release()
-            self._closing = False
-            self._start_processor()
-            self._setup_processor()
+            if not extension:
+                filename += ".h5"
+
+        self._filename = filename
+        self._title = title
+        self._limit = limit
+        self._overwrite = overwrite
+        self._stats = stats
+        self.lastError = None
+        self._recordLock = th.Lock()
+        self._readLock = th.Lock()
+        for l in (self._recordLock, self._readLock):
+            if l.acquire(False):
+                l.release()
+        self._closing = False
+        self._start_processor()
+        self._setup_processor()
 
     def _start_processor(self):
         self._recordControl = multiprocessing.Queue()
