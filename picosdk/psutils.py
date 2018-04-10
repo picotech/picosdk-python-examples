@@ -126,20 +126,25 @@ class StreamingTape(object):
     atom = tb.Atom.from_dtype(np.dtype("int16"))
 
     def __init__(self, filename=None, title=None, limit=1000, overwrite=True, stats=False):
-        self._filename = filename
-        self._title = title
-        self._limit = limit
-        self._overwrite = overwrite
-        self._stats = stats
-        self.lastError = None
-        self._recordLock = th.Lock()
-        self._readLock = th.Lock()
-        for l in (self._recordLock, self._readLock):
-            if l.acquire(False):
-                l.release()
-        self._closing = False
-        self._start_processor()
-        self._setup_processor()
+
+        if not filename:
+            raise ValueError('Error in class StreamingTape: Filename not specified.')
+        else:
+
+            self._filename = filename
+            self._title = title
+            self._limit = limit
+            self._overwrite = overwrite
+            self._stats = stats
+            self.lastError = None
+            self._recordLock = th.Lock()
+            self._readLock = th.Lock()
+            for l in (self._recordLock, self._readLock):
+                if l.acquire(False):
+                    l.release()
+            self._closing = False
+            self._start_processor()
+            self._setup_processor()
 
     def _start_processor(self):
         self._recordControl = multiprocessing.Queue()
