@@ -125,16 +125,19 @@ class StreamingTape(object):
     filters = tb.Filters(complib='blosc', complevel=9)
     atom = tb.Atom.from_dtype(np.dtype("int16"))
 
-    def __init__(self, filename=None, title=None, limit=1000, overwrite=True, stats=False):
+    def __init__(self, filename, title=None, limit=1000, overwrite=True, stats=False):
 
-        if not filename:
-            raise ValueError('Error in class StreamingTape: Filename not specified.')
-        else:
-            # Check filename has an extension
-            extension = os.path.splitext(filename)[-1].lower()
+        # Check filename has an extension
+        extension = os.path.splitext(filename)[-1].lower()
 
-            if not extension:
-                filename += ".h5"
+        if not extension:
+            filename += ".h5"
+
+        # Check file path is writable
+        with open(filename, 'w'):
+            pass
+
+        os.remove(filename)
 
         self._filename = filename
         self._title = title
