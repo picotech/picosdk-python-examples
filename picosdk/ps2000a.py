@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014-2017 Pico Technology Ltd. See LICENSE file for terms.
+# Copyright (C) 2014-2018 Pico Technology Ltd. See LICENSE file for terms.
 #
 """
 Python bindings for [lib]ps2000a.[dll|so|dylib]
@@ -610,7 +610,9 @@ make_symbol(ldlib, "GetMaxSegments", "ps2000aGetMaxSegments", c_uint32, [c_int16
 Defaults
 """
 INI_LOGIC_VOLTS = 1.5
-variants = ("2205MSO", "2206", "2206A", "2207", "2207A", "2208", "2208A")
+variants = ("2205MSO", "2205AMSO", "2405A", "2206", "2206A", "2206B", "2206BMSO", "2406B", 
+            "2207", "2207A", "2207B", "2207BMSO", "2407B", 
+            "2208", "2208A", "2208B", "2208BMSO", "2408B")
 
 
 class Device(PS5000Device):
@@ -627,42 +629,73 @@ class Device(PS5000Device):
             return pico_num("PICO_INVALID_HANDLE")
         if not hasattr(self.info, "variant_info") or self.info.variant_info is None:
             return pico_num("PICO_INFO_UNAVAILABLE")
-        self.info.min_range = self.m.Ranges.r50mv
+        self.info.min_range = self.m.Ranges.r20mv
         self.info.max_range = self.m.Ranges.r20v
         self.info.has_siggen = True
         self.info.siggen_frequency = 1000000
         self.info.siggen_min = 0
         self.info.siggen_max = 40000000
         self.info.has_awg = True
-        self.info.has_ets = False
+        self.info.awg_size = 32768
+        self.info.has_ets = True
+        self.info.num_ports = 0
         if self.info.variant_info == "2205MSO":
             self.info.num_channels = 2
             self.info.num_ports = 2
             self.info.awg_size = 8192
+            self.info.min_range = self.m.Ranges.r50mv
+        elif self.info.variant_info == "2205AMSO":
+            self.info.num_channels = 2
+            self.info.num_ports = 2
+            self.info.awg_size = 8192 
         elif self.info.variant_info == "2206":
             self.info.num_channels = 2
-            self.info.num_ports = 0
             self.info.awg_size = 8192
+            self.info.min_range = self.m.Ranges.r50mv
         elif self.info.variant_info == "2206A":
             self.info.num_channels = 2
-            self.info.num_ports = 0
             self.info.awg_size = 8192
+            self.info.min_range = self.m.Ranges.r50mv
+        elif self.info.variant_info == "2206B":
+            self.info.num_channels = 2
+        elif self.info.variant_info == "2206BMSO":
+            self.info.num_channels = 2
+            self.info.num_ports = 2            
         elif self.info.variant_info == "2207":
             self.info.num_channels = 2
-            self.info.num_ports = 0
             self.info.awg_size = 8192
+            self.info.min_range = self.m.Ranges.r50mv
         elif self.info.variant_info == "2207A":
             self.info.num_channels = 2
-            self.info.num_ports = 0
             self.info.awg_size = 8192
+            self.info.min_range = self.m.Ranges.r50mv
+        elif self.info.variant_info == "2207B":
+            self.info.num_channels = 2            
+        elif self.info.variant_info == "2207BMSO":
+            self.info.num_channels = 2
+            self.info.num_ports = 2
         elif self.info.variant_info == "2208":
             self.info.num_channels = 2
-            self.info.num_ports = 0
             self.info.awg_size = 8192
+            self.info.min_range = self.m.Ranges.r50mv
         elif self.info.variant_info == "2208A":
             self.info.num_channels = 2
-            self.info.num_ports = 0
             self.info.awg_size = 8192
+            self.info.min_range = self.m.Ranges.r50mv
+        elif self.info.variant_info == "2208B":
+            self.info.num_channels = 2
+        elif self.info.variant_info == "2208BMSO":
+            self.info.num_channels = 2
+            self.info.num_ports = 2
+        elif self.info.variant_info == "2405A":
+            self.info.num_channels = 4
+            self.info.awg_size = 8192
+        elif self.info.variant_info == "2406B":
+            self.info.num_channels = 4    
+        elif self.info.variant_info == "2407B":
+            self.info.num_channels = 4
+        elif self.info.variant_info == "2408B":
+            self.info.num_channels = 4    
         else:
             return pico_num("PICO_INFO_UNAVAILABLE")
         return pico_num("PICO_OK")
