@@ -19,7 +19,8 @@
 
 #### Microsoft Windows
 
-* For best experience on Microsoft Windows [Python(x,y)](https://python-xy.github.io/) suite is recommended.
+* For best experience on Microsoft Windows [Python(x,y)](https://python-xy.github.io/) suite is recommended. Note that this will require the 32-bit PicoSDK 
+to be installed (see [Installing drivers]{#installing-drivers})
 
 #### Linux and Mac OS X
 
@@ -53,7 +54,7 @@ driver package (see above), the Python installer can be used as follows:
 
     python setup.py install
 
-on macOS and Linux you will either need to use `sudo` with this command, to
+On macOS and Linux you will either need to use `sudo` with this command, to
 install into the system folders, or to install for the current user only you
 can use:
 
