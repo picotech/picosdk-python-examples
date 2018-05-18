@@ -671,6 +671,10 @@ class Device(PS5000Device):
         self._handle = self._chandle.value
         self.info.handle = self._handle
 
+        if status in (pico_num("PICO_POWER_SUPPLY_NOT_CONNECTED"), pico_num('PICO_USB3_0_DEVICE_NON_USB3_0_PORT')):
+            print("Warning: External power supply not connected or USB 3.0 device on non-USB 3.0 port.")
+            status = self.set_power_source(status)
+
         """ Read INFO from device, populate self.info """
         if status == pico_num("PICO_OK"):
             status = self.load_info()
