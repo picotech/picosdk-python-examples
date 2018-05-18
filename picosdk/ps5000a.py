@@ -797,9 +797,9 @@ class Device(PS5000Device):
 
     def get_device_resolution(self):
         """" Get device ADC resolution
-        :param resolution: enum as in Resolutions
-        :rtype resolution: int
         :return: status of the call
+        :rtype: int
+        :return: resolution of the device
         :rtype: int
         """
 
@@ -829,6 +829,8 @@ class Device(PS5000Device):
 
     def _get_device_resolution(self, ref_resolution):
         return ldlib.GetDeviceResolution(self._chandle, ref_resolution)
+
+
 
 def enumerate_units():
     global ldlib
