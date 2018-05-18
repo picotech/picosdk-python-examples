@@ -670,6 +670,7 @@ class Device(PS5000Device):
 
         self._handle = self._chandle.value
         self.info.handle = self._handle
+
         """ Read INFO from device, populate self.info """
         if status == pico_num("PICO_OK"):
             status = self.load_info()
@@ -787,7 +788,6 @@ class Device(PS5000Device):
         """
         if self._handle <= 0:
             return pico_num("PICO_INVALID_HANDLE")
-        print(Resolutions.labels[resolution])
         if resolution not in Resolutions.labels:
             return pico_num("PICO_INVALID_DEVICE_RESOLUTION")
         status = ldlib.SetDeviceResolution(self._chandle, c_int32(resolution))
