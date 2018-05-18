@@ -944,7 +944,7 @@ class Device(PS5000Device):
             status = self.set_defaults()
         if status == pico_num("PICO_OK") and self.info.variant_info == "4444":
             """ Initialise device resolution cache """
-            status = self._get_device_resolution()
+            status, resolution = self.get_device_resolution()
         return status
 
     def _set_variant_info(self):
@@ -1040,14 +1040,15 @@ class Device(PS5000Device):
             self.info.resolution = resolution
         return status
     
-    def _get_device_resolution(self):
+    def get_device_resolution(self):
         if self._handle <= 0:
             return pico_num("PICO_INVALID_HANDLE")
-        res = c_int32(-1)
-        status = ldlib.GetDeviceResolution(self._chandle, byref(res))
+        resolution = c_int32(0)
+        status = self._get_device_resolution(byref(resolution))
+
         if status == pico_num("PICO_OK"):
-            self.info.resolution = res.value
-        return status
+            self.info.resolution = resolution.value
+        return status, resolution.value
 
     def set_advanced_trigger(self, conditions=None, analog=None, digital=None, waitfor=0):
         """ Passes advanced triggering setup to the driver
@@ -1234,6 +1235,8 @@ class Device(PS5000Device):
         return ldlib.RunBlock(self._chandle, c_int32(pretrig), c_int32(posttrig), c_uint32(timebase),
                               ref_time, c_uint32(segment), ref_cb, ref_cb_param)
 
+    def _get_device_resolution(self, ref_resolution):
+        return ldlib.GetDeviceResolution(self._chandle, ref_resolution)
 
 def enumerate_units():
     global ldlib
