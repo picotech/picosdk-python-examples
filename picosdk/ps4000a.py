@@ -1013,7 +1013,7 @@ class Device(PS5000Device):
         if power == pico_num("PICO_OK"):
             return power
         return ldlib.ChangePowerSource(self._chandle, c_uint32(power))
-		
+
     def set_device_resolution(self, resolution):
         """ Set device ADC resolution
         :param resolution: enum as in Resolutions
@@ -1023,6 +1023,8 @@ class Device(PS5000Device):
         """
         if self._handle <= 0:
             return pico_num("PICO_INVALID_HANDLE")
+        if resolution not in Resolutions.labels:
+            return pico_num("PICO_INVALID_DEVICE_RESOLUTION")
         status = ldlib.SetDeviceResolution(self._chandle, c_int32(resolution))
         if status == pico_num("PICO_OK"):
             self.info.resolution = resolution

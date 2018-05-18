@@ -787,10 +787,29 @@ class Device(PS5000Device):
         """
         if self._handle <= 0:
             return pico_num("PICO_INVALID_HANDLE")
+        print(Resolutions.labels[resolution])
+        if resolution not in Resolutions.labels:
+            return pico_num("PICO_INVALID_DEVICE_RESOLUTION")
         status = ldlib.SetDeviceResolution(self._chandle, c_int32(resolution))
         if status == pico_num("PICO_OK"):
             self.info.resolution = resolution
         return status
+
+    def get_device_resolution(self):
+        """" Get device ADC resolution
+        :param resolution: enum as in Resolutions
+        :rtype resolution: int
+        :return: status of the call
+        :rtype: int
+        """
+
+        if self._handle <= 0:
+            return pico_num("PICO_INVALID_HANDLE")
+
+        resolution = c_int32(0)
+
+        status = self._get_device_resolution(byref(resolution))
+        return status, resolution.value
 
     def _set_sig_gen_built_in(self, offset, pk2pk, wave, start, stop, increment, dwelltime,
                               sweep, extra, shots, sweeps, trigt, trigs, threshold):
@@ -808,6 +827,8 @@ class Device(PS5000Device):
         return ldlib.RunBlock(self._chandle, c_int32(pretrig), c_int32(posttrig), c_uint32(timebase),
                               ref_time, c_uint32(segment), ref_cb, ref_cb_param)
 
+    def _get_device_resolution(self, ref_resolution):
+        return ldlib.GetDeviceResolution(self._chandle, ref_resolution)
 
 def enumerate_units():
     global ldlib
