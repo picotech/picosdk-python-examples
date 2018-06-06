@@ -21,6 +21,16 @@ from exceptions import AttributeError, OSError, TypeError
 from copy import deepcopy
 from picosdk.picostatus import pico_num
 
+#support all versions of pytables
+if not hasattr(tb, "openFile"):
+    tb.openFile = tb.open_file
+    tb.File.listNodes = tb.File.list_nodes
+    tb.File.getNode = tb.File.get_node
+    tb.File.iterNodes = tb.File.iter_nodes
+    tb.File.createGroup = tb.File.create_group
+    tb.File.createCArray = tb.File.create_carray
+    tb.Node._f_setAttr = tb.Node._f_setattr
+
 """ disable warnings from PyTables """
 for cat in ("UndoRedoWarning", "NaturalNameWarning", "PerformanceWarning", "FlavorWarning", "FiltersWarning",
             "OldIndexWarning", "DataTypeWarning", "Incompat16Warning", "ExperimentalFeatureWarning"):
