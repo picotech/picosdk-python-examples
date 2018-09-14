@@ -1,6 +1,8 @@
-# picosdk-python-examples
+# DEPRECATED
 
-*picosdk-python-examples* contains an example Python module for PicoScope oscilloscopes.
+This repository is no longer supported, please consider using [picosdk-python-wrappers](https://github.com/picotech/picosdk-python-wrappers) instead.
+
+This repository contains an example Python module for PicoScope oscilloscopes.
 
 ## Getting started
 
