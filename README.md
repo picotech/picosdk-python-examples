@@ -122,6 +122,10 @@ The following are Python examples written by our customers:
 * [usbtc08](https://github.com/bankrasrg/usbtc08)
 * [picostream](https://github.com/jbentham/picostream)
 
+The following is a fork of this repository:
+
+* [Lorac/picosdk-python-examples](https://github.com/Lorac/picosdk-python-examples)
+
 ## Copyright and licensing
 
 See [LICENSE.md](LICENSE.md) for license terms. 
